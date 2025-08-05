@@ -1,4 +1,4 @@
-
+using Persistence;
 namespace LessonsWebApi
 {
 	public class Program
@@ -18,6 +18,9 @@ namespace LessonsWebApi
 			builder.Configuration.SetBasePath(env.ContentRootPath);
 			builder.Configuration.AddJsonFile("appsettings.json", optional: false);
 			builder.Configuration.AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+			
+			var connectionString = builder.Configuration.GetSection("ConnectionStrings").GetSection("Default").Value;
+			builder.Services.AddContext(connectionString);
 
 			var app = builder.Build();
 
