@@ -21,6 +21,7 @@ namespace LessonsWebApi
 			
 			var connectionString = builder.Configuration.GetSection("ConnectionStrings").GetSection("Default").Value;
 			builder.Services.AddContext(connectionString);
+			builder.Services.AddPersistence();
 
 			var app = builder.Build();
 
