@@ -16,6 +16,7 @@ namespace Persistence
 		public static void AddPersistence(this IServiceCollection services)
 		{
 			services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
+			services.AddScoped(typeof(IWriteRepository<>), typeof(WriteRepository<>));
 		}
 	}
 }
