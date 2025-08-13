@@ -1,8 +1,10 @@
 ﻿using Application.Interfaces.Repositories;
+using Application.Interfaces.UnitOfWorks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Contexts;
 using Persistence.Repositories;
+using Persistence.UnitOfWorks;
 
 namespace Persistence
 {
@@ -17,6 +19,8 @@ namespace Persistence
 		{
 			services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
 			services.AddScoped(typeof(IWriteRepository<>), typeof(WriteRepository<>));
+
+			services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
 		}
 	}
 }

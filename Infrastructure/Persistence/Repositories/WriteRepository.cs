@@ -16,7 +16,7 @@ namespace Persistence.Repositories
 		private DbSet<T> Table {  get => dbContext.Set<T>(); }
 		public async Task AddAsync(T entity)
 		{
-			await Table.AddAsync(entity).;			
+			await Table.AddAsync(entity);			
 		}
 
 		public async Task AddRangeAsync(IList<T> entities)
