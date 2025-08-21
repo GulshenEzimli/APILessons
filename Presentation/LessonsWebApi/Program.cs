@@ -1,4 +1,5 @@
 using Persistence;
+using Application;
 namespace LessonsWebApi
 {
 	public class Program
@@ -22,6 +23,7 @@ namespace LessonsWebApi
 			var connectionString = builder.Configuration.GetSection("ConnectionStrings").GetSection("Default").Value;
 			builder.Services.AddContext(connectionString);
 			builder.Services.AddPersistence();
+			builder.Services.AddApplication();
 
 			var app = builder.Build();
 

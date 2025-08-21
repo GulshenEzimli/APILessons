@@ -1,5 +1,8 @@
-﻿using Application.Interfaces.UnitOfWorks;
+﻿using Application.Features.Queries.Request;
+using Application.Features.Queries.Response;
+using Application.Interfaces.UnitOfWorks;
 using Domain.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,15 +12,15 @@ namespace LessonsWebApi.Controllers
 	[ApiController]
 	public class ProductController : ControllerBase
 	{
-		private readonly IUnitOfWork _unitOfWork;
-		public ProductController(IUnitOfWork unitOfWork)
+		private readonly IMediator _mediator;
+		public ProductController(IMediator mediator)
 		{
-			_unitOfWork = unitOfWork;
+			_mediator = mediator;
 		}
 		[HttpGet]
 		public async Task<IActionResult> GetAll()
 		{
-			var entities = await _unitOfWork.GetReadRepository<Product>().GetAllAsync();
+			var entities = await _mediator.Send<IList<GetAllProductQueryResponse>>(new GetAllProductQueryRequest());
 			return Ok(entities);
 		}
 
