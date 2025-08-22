@@ -1,4 +1,5 @@
-﻿using Application.Features.Queries.Request;
+﻿using Application.Features.Commands.Requests;
+using Application.Features.Queries.Request;
 using Application.Features.Queries.Response;
 using Application.Interfaces.UnitOfWorks;
 using Domain.Entities;
@@ -20,9 +21,29 @@ namespace LessonsWebApi.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GetAll()
 		{
-			var entities = await _mediator.Send<IList<GetAllProductQueryResponse>>(new GetAllProductQueryRequest());
+			var entities = await _mediator.Send(new GetAllProductQueryRequest());
 			return Ok(entities);
 		}
 
+		[HttpPost]
+		public async Task<IActionResult> Create(CreateProductCommandRequest request)
+		{
+			await _mediator.Send(request);
+			return Ok();
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Update(UpdateProductCommandRequest request)
+		{
+			await _mediator.Send(request);
+			return Ok();
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Delete(DeleteProductCommandRequest request)
+		{
+			await _mediator.Send(request);
+			return Ok();
+		}
 	}
 }

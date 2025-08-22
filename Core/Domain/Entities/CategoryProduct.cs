@@ -1,6 +1,9 @@
-﻿namespace Domain.Entities
+﻿using Domain.Common.Abstraction;
+using Domain.Common.Interface;
+
+namespace Domain.Entities
 {
-	public class CategoryProduct
+	public class CategoryProduct : IEntity
 	{
 		public int ProductId { get; set; }
 		public int CategoryId { get; set; }
