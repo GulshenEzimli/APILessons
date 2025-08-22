@@ -1,7 +1,9 @@
-﻿using Application.Interfaces.Repositories;
+﻿using Application.Interfaces.AutoMappers;
+using Application.Interfaces.Repositories;
 using Application.Interfaces.UnitOfWorks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Persistence.AutoMapper;
 using Persistence.Contexts;
 using Persistence.Repositories;
 using Persistence.UnitOfWorks;
@@ -21,6 +23,11 @@ namespace Persistence
 			services.AddScoped(typeof(IWriteRepository<>), typeof(WriteRepository<>));
 
 			services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
+		}
+
+		public static void AddCustomMapper(this IServiceCollection services)
+		{
+			services.AddSingleton<IMapper, Mapper>();
 		}
 	}
 }

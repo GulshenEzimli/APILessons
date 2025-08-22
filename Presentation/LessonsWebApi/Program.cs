@@ -24,6 +24,7 @@ namespace LessonsWebApi
 			builder.Services.AddContext(connectionString);
 			builder.Services.AddPersistence();
 			builder.Services.AddApplication();
+			builder.Services.AddCustomMapper();
 
 			var app = builder.Build();
 

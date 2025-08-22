@@ -1,4 +1,6 @@
-﻿namespace Application.Features.Queries.Response
+﻿using Application.Dtos;
+
+namespace Application.Features.Queries.Response
 {
 	public class GetAllProductQueryResponse
 	{
@@ -6,5 +8,6 @@
 		public string Description { get; set; }
 		public decimal Price { get; set; }
 		public decimal Discount { get; set; }
+		public BrandDto Brand { get; set; }
 	}
 }
