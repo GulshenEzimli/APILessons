@@ -8,5 +8,6 @@ namespace Domain.Entities
 		public int Priority { get; set; }
 		public int ParentId { get; set; }
 		public IList<Detail> Deatils { get; set; }
+		public IList<CategoryProduct> CategoryProducts { get; set; }
 	}
 }

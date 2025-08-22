@@ -10,5 +10,6 @@ namespace Domain.Entities
 		public decimal Discount { get; set; }
 		public int BrandId { get; set; }
 		public Brand Brand { get; set; }
+		public IList<CategoryProduct> ProductCategories { get; set; }
 	}
 }
