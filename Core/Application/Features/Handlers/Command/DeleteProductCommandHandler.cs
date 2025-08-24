@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.Features.Handlers.Command
 {
-	public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommandRequest>
+	public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommandRequest, Unit>
 	{
 		private readonly IUnitOfWork unitOfWork;
 
@@ -13,13 +13,15 @@ namespace Application.Features.Handlers.Command
 		{
 			this.unitOfWork = unitOfWork;
 		}
-		public async Task Handle(DeleteProductCommandRequest request, CancellationToken cancellationToken)
+		public async Task<Unit> Handle(DeleteProductCommandRequest request, CancellationToken cancellationToken)
 		{
 			var product = await unitOfWork.GetReadRepository<Product>().GetAsync(p => p.Id == request.Id && !p.IsDeleted);
 			product.IsDeleted = true;
 
 			await unitOfWork.GetWriteRepository<Product>().UpdateAsync(product);
 			await unitOfWork.SaveAsync();
+
+			return Unit.Value;
 		}
 	}
 }

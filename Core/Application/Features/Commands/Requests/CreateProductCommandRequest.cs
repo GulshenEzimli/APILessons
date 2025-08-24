@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Application.Features.Commands.Requests
 {
-	public class CreateProductCommandRequest : IRequest
+	public class CreateProductCommandRequest : IRequest<Unit>
 	{
 		public string Title { get; set; }
 		public string Description { get; set; }

@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Application.Features.Handlers.Command
 {
-	public class CreateProductCommandHandler : IRequestHandler<CreateProductCommandRequest>
+	public class CreateProductCommandHandler : IRequestHandler<CreateProductCommandRequest, Unit>
 	{
 		private readonly IUnitOfWork unitOfWork;
 		private readonly IMapper mapper;
@@ -17,7 +17,7 @@ namespace Application.Features.Handlers.Command
 			this.unitOfWork = unitOfWork;
 			this.mapper = mapper;
 		}
-		public async Task Handle(CreateProductCommandRequest request, CancellationToken cancellationToken)
+		public async Task<Unit> Handle(CreateProductCommandRequest request, CancellationToken cancellationToken)
 		{
 			var productMap = mapper.Map<CreateProductCommandRequest, Product>(request);
 
@@ -36,6 +36,8 @@ namespace Application.Features.Handlers.Command
 				}
 				await unitOfWork.SaveAsync();
 			}
+
+			return Unit.Value;
 		}
 	}
 }
