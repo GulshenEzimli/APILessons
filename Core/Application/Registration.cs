@@ -8,8 +8,9 @@ namespace Application
 	{
 		public static void AddApplication(this IServiceCollection services)
 		{
+			services.AddTransient<ExceptionMiddleware>();
+
 			services.AddMediatR(config => config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-			services.AddSingleton<ExceptionMiddleware>();
 		}
 	}
 }
