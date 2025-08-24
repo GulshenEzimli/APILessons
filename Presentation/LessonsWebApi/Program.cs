@@ -1,5 +1,6 @@
 using Persistence;
 using Application;
+using Application.Exceptions;
 namespace LessonsWebApi
 {
 	public class Program
@@ -37,8 +38,8 @@ namespace LessonsWebApi
 
 			app.UseHttpsRedirection();
 
+			app.ConfigureExceptionHandlingMiddleware();
 			app.UseAuthorization();
-
 
 			app.MapControllers();
 

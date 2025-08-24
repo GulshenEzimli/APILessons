@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Application.Exceptions;
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 namespace Application
@@ -8,6 +9,7 @@ namespace Application
 		public static void AddApplication(this IServiceCollection services)
 		{
 			services.AddMediatR(config => config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+			services.AddSingleton<ExceptionMiddleware>();
 		}
 	}
 }
