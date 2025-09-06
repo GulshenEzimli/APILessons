@@ -1,17 +1,14 @@
 ﻿using Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using System.Reflection;
 
 namespace Persistence.Contexts
 {
-	public class ApiContext : DbContext
+	public class ApiContext : IdentityDbContext<User,Role, Guid>
 	{
-		public ApiContext()
-		{
-
-		}
-
+		
 		public ApiContext(DbContextOptions<ApiContext> options) : base(options)
 		{
 
@@ -22,9 +19,12 @@ namespace Persistence.Contexts
 		public DbSet<Detail> Details { get; set; }
 		public DbSet<Product> Products { get; set; }
 		public DbSet<CategoryProduct> CategoryProducts { get; set; }
+		public DbSet<User> Users { get; set; }
+		public DbSet<Role> Roles { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
+			base.OnModelCreating(modelBuilder);
 			modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 		}
 
