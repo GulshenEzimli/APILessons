@@ -33,8 +33,7 @@ namespace Persistence
 				opt.Password.RequireUppercase = false;
 				opt.Password.RequireDigit = false;
 				opt.SignIn.RequireConfirmedEmail = false;
-			})
-				.AddRoles<Role>().AddEntityFrameworkStores<ApiContext>();
+			}).AddRoles<Role>().AddEntityFrameworkStores<ApiContext>();
 		}
 
 		public static void AddCustomMapper(this IServiceCollection services)
