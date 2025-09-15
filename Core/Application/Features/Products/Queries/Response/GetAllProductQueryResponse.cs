@@ -1,6 +1,6 @@
 ﻿using Application.Dtos;
 
-namespace Application.Features.Queries.Response
+namespace Application.Features.Products.Queries.Response
 {
 	public class GetAllProductQueryResponse
 	{

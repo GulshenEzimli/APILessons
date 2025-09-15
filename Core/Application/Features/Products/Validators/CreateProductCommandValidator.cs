@@ -1,7 +1,7 @@
-﻿using Application.Features.Commands.Requests;
+﻿using Application.Features.Products.Commands.Requests;
 using FluentValidation;
 
-namespace Application.Validators
+namespace Application.Features.Products.Validators
 {
 	public class CreateProductCommandValidator : AbstractValidator<CreateProductCommandRequest>
 	{

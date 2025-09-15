@@ -1,6 +1,6 @@
 ﻿using Application.Bases;
 
-namespace Application.Features.Exceptions
+namespace Application.Features.Products.Exceptions
 {
 	public class ProductTitleMustNotBeSameException : BaseExceptions
 	{

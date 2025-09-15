@@ -1,8 +1,8 @@
 ﻿using Application.Bases;
-using Application.Features.Exceptions;
+using Application.Features.Products.Exceptions;
 using Domain.Entities;
 
-namespace Application.Features.Rules
+namespace Application.Features.Products.Rules
 {
 	public class ProductRules : BaseRules
 	{

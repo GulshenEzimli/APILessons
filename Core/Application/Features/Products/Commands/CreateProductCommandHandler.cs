@@ -1,23 +1,20 @@
-﻿using Application.Dtos;
-using Application.Features.Commands.Requests;
-using Application.Features.Rules;
+﻿using Application.Bases;
+using Application.Features.Products.Commands.Requests;
+using Application.Features.Products.Rules;
 using Application.Interfaces.AutoMappers;
 using Application.Interfaces.UnitOfWorks;
 using Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
-namespace Application.Features.Handlers.Command
+namespace Application.Features.Products.Commands
 {
-	public class CreateProductCommandHandler : IRequestHandler<CreateProductCommandRequest, Unit>
+	public class CreateProductCommandHandler : BaseHandler, IRequestHandler<CreateProductCommandRequest, Unit>
 	{
-		private readonly IUnitOfWork unitOfWork;
-		private readonly IMapper mapper;
 		private readonly ProductRules productRules;
 
-		public CreateProductCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, ProductRules productRules)
+		public CreateProductCommandHandler(IUnitOfWork unitOfWork, IMapper mapper,IHttpContextAccessor httpContextAccessor, ProductRules productRules) : base(mapper, unitOfWork, httpContextAccessor)
 		{
-			this.unitOfWork = unitOfWork;
-			this.mapper = mapper;
 			this.productRules = productRules;
 		}
 		public async Task<Unit> Handle(CreateProductCommandRequest request, CancellationToken cancellationToken)

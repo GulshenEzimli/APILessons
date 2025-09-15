@@ -1,13 +1,13 @@
 ﻿using Application.Dtos;
-using Application.Features.Queries.Request;
-using Application.Features.Queries.Response;
+using Application.Features.Products.Queries.Request;
+using Application.Features.Products.Queries.Response;
 using Application.Interfaces.AutoMappers;
 using Application.Interfaces.UnitOfWorks;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Features.Handlers.Query
+namespace Application.Features.Products.Queries
 {
 	public class GetAllProductQueryHandler : IRequestHandler<GetAllProductQueryRequest, IList<GetAllProductQueryResponse>>
 	{

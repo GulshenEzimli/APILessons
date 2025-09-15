@@ -1,7 +1,7 @@
 ﻿using Application.Dtos;
 using MediatR;
 
-namespace Application.Features.Commands.Requests
+namespace Application.Features.Products.Commands.Requests
 {
 	public class CreateProductCommandRequest : IRequest<Unit>
 	{
