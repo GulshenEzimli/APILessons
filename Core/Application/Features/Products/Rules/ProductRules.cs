@@ -4,7 +4,7 @@ using Domain.Entities;
 
 namespace Application.Features.Products.Rules
 {
-	public class ProductRules : BaseRules
+	public class ProductRules : BaseRule
 	{
 		public Task ProductTitleMustNotBeSame(IList<Product> products, string productTitle)
 		{

@@ -1,4 +1,4 @@
-﻿using Application.Features.Commands.Requests;
+﻿using Application.Features.Products.Commands.Requests;
 using Application.Features.Queries.Request;
 using Application.Features.Queries.Response;
 using Application.Interfaces.UnitOfWorks;

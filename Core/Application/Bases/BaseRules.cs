@@ -1,6 +1,6 @@
 ﻿namespace Application.Bases
 {
-	public abstract class BaseRules
+	public abstract class BaseRule
 	{
 	}
 }

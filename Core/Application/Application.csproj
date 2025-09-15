@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Commands\Responses\" />
+    <Folder Include="Features\Auth\Register\Queries\" />
   </ItemGroup>
 
 </Project>

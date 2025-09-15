@@ -25,7 +25,7 @@ namespace Application
 
 			services.AddTransient(typeof(IPipelineBehavior<,>), typeof(FluentValidationBehavior<,>));
 
-			services.AddAllRulesFromAssemblyContaining(assembly, typeof(BaseRules));
+			services.AddAllRulesFromAssemblyContaining(assembly, typeof(BaseRule));
 		}
 		private static void AddAllRulesFromAssemblyContaining(this IServiceCollection services, Assembly assembly, Type type)
 		{
