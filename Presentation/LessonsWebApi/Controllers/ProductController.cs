@@ -1,10 +1,6 @@
 ﻿using Application.Features.Products.Commands.Requests;
-using Application.Features.Queries.Request;
-using Application.Features.Queries.Response;
-using Application.Interfaces.UnitOfWorks;
-using Domain.Entities;
+using Application.Features.Products.Queries.Request;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LessonsWebApi.Controllers

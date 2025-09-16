@@ -1,7 +1,6 @@
 ﻿using Application.Bases;
 using Application.Behaviors;
 using Application.Exceptions;
-using Application.Features.Rules;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;

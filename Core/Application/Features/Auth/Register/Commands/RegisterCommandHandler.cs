@@ -1,6 +1,6 @@
 ﻿using Application.Bases;
 using Application.Features.Auth.Register.Commands.Requests;
-using Application.Features.Auth.Register.Rules;
+using Application.Features.Auth.Rules;
 using Application.Interfaces.AutoMappers;
 using Application.Interfaces.UnitOfWorks;
 using Domain.Entities;
@@ -12,11 +12,11 @@ namespace Application.Features.Auth.Register.Commands
 {
 	public class RegisterCommandHandler : BaseHandler,IRequestHandler<RegisterCommandRequest, Unit>
 	{
-		private readonly AuthRules authRules;
+		private readonly RegisterRules authRules;
 		private readonly UserManager<User> userManager;
 		private readonly RoleManager<Role> roleManager;
 
-		public RegisterCommandHandler(AuthRules authRules, UserManager<User> userManager, RoleManager<Role> roleManager,IMapper mapper, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor) : base(mapper, unitOfWork, httpContextAccessor)
+		public RegisterCommandHandler(RegisterRules authRules, UserManager<User> userManager, RoleManager<Role> roleManager,IMapper mapper, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor) : base(mapper, unitOfWork, httpContextAccessor)
 		{
 			this.authRules = authRules;
 			this.userManager = userManager;

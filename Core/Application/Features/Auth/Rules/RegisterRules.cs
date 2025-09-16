@@ -1,10 +1,10 @@
 ﻿using Application.Bases;
-using Application.Features.Auth.Register.Exceptions;
+using Application.Features.Auth.Exceptions;
 using Domain.Entities;
 
-namespace Application.Features.Auth.Register.Rules
+namespace Application.Features.Auth.Rules
 {
-	public class AuthRules: BaseRule
+	public class RegisterRules: BaseRule
 	{
 		public Task UserShouldNotBeExist(User? user)
 		{

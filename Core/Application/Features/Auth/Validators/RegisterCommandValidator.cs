@@ -1,7 +1,7 @@
 ﻿using Application.Features.Auth.Register.Commands.Requests;
 using FluentValidation;
 
-namespace Application.Features.Auth.Register.Validators
+namespace Application.Features.Auth.Validators
 {
 	public class RegisterCommandValidator : AbstractValidator<RegisterCommandRequest>
 	{

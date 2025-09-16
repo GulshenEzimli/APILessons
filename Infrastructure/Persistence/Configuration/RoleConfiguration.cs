@@ -8,7 +8,9 @@ namespace Persistence.Configuration
 	{
 		public void Configure(EntityTypeBuilder<Role> builder)
 		{
-			builder.ToTable("Roles").HasKey(x => x.Id);
+			builder.ToTable("Roles");
+			builder.HasKey(x => x.Id);
+			builder.Property(x => x.Id).HasColumnType("uniqueidentifier").ValueGeneratedOnAdd();
 		}
 	}
 }

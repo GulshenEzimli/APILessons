@@ -50,6 +50,7 @@ namespace LessonsWebApi
 			builder.Services.AddPersistence();
 			builder.Services.AddApplication();
 			builder.Services.AddCustomMapper();
+			builder.Services.AddHttpContextAccessor();
 
 			var app = builder.Build();
 

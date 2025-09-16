@@ -1,6 +1,6 @@
 ﻿using Application.Bases;
 
-namespace Application.Features.Auth.Register.Exceptions
+namespace Application.Features.Auth.Exceptions
 {
 	public class UserAlreadyExistException : BaseException
 	{
