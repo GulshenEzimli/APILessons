@@ -2,6 +2,8 @@
 using Application;
 using Application.Exceptions;
 using Microsoft.OpenApi.Models;
+using Infrastructure;
+
 namespace LessonsWebApi
 {
 	public class Program
@@ -51,6 +53,7 @@ namespace LessonsWebApi
 			builder.Services.AddApplication();
 			builder.Services.AddCustomMapper();
 			builder.Services.AddHttpContextAccessor();
+			builder.Services.AddInfrastructure(builder.Configuration);
 
 			var app = builder.Build();
 

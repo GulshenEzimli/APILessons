@@ -38,14 +38,14 @@ namespace Infrastructure.Tokens
 
 			var token = new JwtSecurityToken(
 				issuer: settings.Issuer,
-				audience : settings.Audience,
+				audience: settings.Audience,
 				claims: claims,
-				expires : DateTime.Now.AddMinutes(settings.TokenValidityInMinutes),
-				signingCredentials : credential
+				expires: DateTime.Now.AddMinutes(settings.TokenValidityInMinutes),
+				signingCredentials: credential
 			);
 
 
-			await _userManager.AddClaimsAsync(user, claims);	
+			await _userManager.AddClaimsAsync(user, claims);
 			return token;
 		}
 
@@ -74,7 +74,7 @@ namespace Infrastructure.Tokens
 
 			if (securityToken is not JwtSecurityToken jwtSecurityToken || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
 				throw new SecurityTokenException();
-			
+
 			return principal;
 		}
 	}

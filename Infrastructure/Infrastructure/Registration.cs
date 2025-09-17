@@ -1,7 +1,5 @@
 ﻿using Application.Interfaces.Tokens;
 using Infrastructure.Tokens;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,7 +12,7 @@ namespace Infrastructure
 	{
 		public static void AddInfrastructure(this IServiceCollection services, IConfiguration config)
 		{
-			services.Configure<TokenSettings>(config.GetSection("JWT"));
+			services.Configure<TokenSettings>(opt => config.GetSection("JWT"));
 
 			services.AddTransient<ITokenService, TokenService>();
 
