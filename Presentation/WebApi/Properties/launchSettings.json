@@ -19,20 +19,20 @@
                 "ASPNETCORE_ENVIRONMENT": "Development"
             }
         },
-        "LessonsApi": {
+        "LessonsApi.Development": {
             "commandName": "Project",
             "dotnetRunMessages": true,
-            "launchBrowser": false,
+            "launchBrowser": true,
             "applicationUrl": "https://localhost:7224",
             "environmentVariables": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
             }
         },
-        "LessonsApi:Production": {
+        "LessonsApi.Production": {
             "commandName": "Project",
             "dotnetRunMessages": true,
             "launchBrowser": false,
-            "applicationUrl": "https://localhost:7224",
+            "applicationUrl": "http://localhost:5179",
             "environmentVariables": {
                 "ASPNETCORE_ENVIRONMENT": "Production"
             }
