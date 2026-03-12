@@ -11,6 +11,6 @@ namespace Domain.Entities
         public decimal Discount { get; set; }
         public string ImagePath { get; set; }
         public Brand Brand { get; set; }
-        public ICollection<CategoryProduct> ProductCategories { get; set; }
+        public ICollection<CategoryProduct> CategoryProducts { get; set; }
     }
 }

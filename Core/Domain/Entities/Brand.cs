@@ -5,5 +5,6 @@ namespace Domain.Entities
     public class Brand : EntityBase
     {
         public int Name { get; set; }
+        public ICollection<Product> Products { get; set; }
     }
 }
