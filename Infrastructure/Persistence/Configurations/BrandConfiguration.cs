@@ -13,7 +13,7 @@ namespace Persistence.Configurations
 
             builder.Property(b => b.Name).IsRequired().HasMaxLength(100);
             builder.Property(b => b.IsDeleted).IsRequired().HasDefaultValue(false);
-            builder.Property(b => b.CreatedDate).IsRequired().HasDefaultValue(DateTime.Now);
+            builder.Property(b => b.CreatedDate).IsRequired();
 
         }
     }
