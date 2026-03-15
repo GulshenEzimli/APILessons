@@ -1,4 +1,4 @@
-
+using Persistence;
 namespace WebApi
 {
     public class Program
@@ -15,6 +15,7 @@ namespace WebApi
                                .AddJsonFile("appSettings.json", optional : false)
                                .AddJsonFile($"appSettings.{env.EnvironmentName}.json", optional : true);
 
+            builder.Services.AddDbContext(builder.Configuration);
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())

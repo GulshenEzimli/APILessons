@@ -14,7 +14,7 @@ namespace Persistence.Configurations
             builder.Property(e => e.Title).IsRequired().HasMaxLength(256);
             builder.Property(e => e.Description).IsRequired().HasMaxLength(256);
             builder.Property(e => e.IsDeleted).IsRequired().HasDefaultValue(false);
-            builder.Property(e => e.CreatedDate).IsRequired().HasDefaultValue(DateTime.Now);
+            builder.Property(e => e.CreatedDate).IsRequired();
 
             builder.HasOne(e => e.Category).WithMany(c => c.Details).HasForeignKey(d => d.CategoryId).OnDelete(DeleteBehavior.Restrict);
 
