@@ -16,6 +16,8 @@ namespace WebApi
                                .AddJsonFile($"appSettings.{env.EnvironmentName}.json", optional : true);
 
             builder.Services.AddDbContext(builder.Configuration);
+            builder.Services.AddPersistence();
+
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())
