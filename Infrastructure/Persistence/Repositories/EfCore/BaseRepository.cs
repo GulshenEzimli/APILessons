@@ -81,31 +81,25 @@ namespace Persistence.Repositories.EfCore
             return queryable.Where(predicate);
         }
 
-        public async Task<int> CreateAsync(T entity)
+        public async Task CreateAsync(T entity)
         {
             await DbSet.AddAsync(entity);
-            return await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<int> CreateRangeAsync(IList<T> entities)
+        public async Task CreateRangeAsync(IList<T> entities)
         {
             await DbSet.AddRangeAsync(entities);
-            return await _dbContext.SaveChangesAsync();
         }
 
         public async Task<T> UpdateAsync(T entity)
         {
-            var entityEntry = DbSet.Update(entity);
-            await _dbContext.SaveChangesAsync();
-
-            return entityEntry.Entity;  
+            await Task.Run(() => DbSet.Update(entity));
+            return entity;
         }
 
         public async Task DeleteAsync(T entity)
         {
-            DbSet.Remove(entity);
-
-            await _dbContext.SaveChangesAsync();
+            await Task.Run(() => DbSet.Remove(entity));
         }
 
         public async Task<int> CountAsync(Expression<Func<T, bool>>? predicate = null)
