@@ -20,8 +20,8 @@ namespace Application.Interfaces.Repositories.EfCore
             bool enableTracking = false);
 
         IQueryable<T> Find(Expression<Func<T, bool>> predicate, bool enableTracking = false);
-        Task<int> CreateAsync(T entity);
-        Task<int> CreateRangeAsync(IList<T> entities);
+        Task CreateAsync(T entity);
+        Task CreateRangeAsync(IList<T> entities);
         Task<T> UpdateAsync(T entity);
         Task DeleteAsync(T entity);
         Task<int> CountAsync(Expression<Func<T, bool>>? predicate = null);
