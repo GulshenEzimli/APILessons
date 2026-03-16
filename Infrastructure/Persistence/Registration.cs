@@ -1,10 +1,12 @@
 ﻿using Application.Interfaces.Repositories;
 using Application.Interfaces.Repositories.EfCore;
+using Application.Interfaces.UnitOfWorks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Context;
 using Persistence.Repositories.EfCore;
+using Persistence.UnitOfWorks;
 
 namespace Persistence
 {
@@ -19,7 +21,8 @@ namespace Persistence
 
         public static void AddPersistence(this IServiceCollection services)
         {
-            services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
         }
     }
 }
