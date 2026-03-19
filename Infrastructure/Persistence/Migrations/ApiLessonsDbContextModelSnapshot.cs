@@ -38,9 +38,10 @@ namespace Persistence.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<int>("Name")
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -63,9 +64,10 @@ namespace Persistence.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<int>("Name")
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("ParentId")
                         .HasColumnType("int");
