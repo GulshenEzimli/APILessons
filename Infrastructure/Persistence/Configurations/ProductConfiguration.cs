@@ -13,9 +13,9 @@ namespace Persistence.Configurations
 
             builder.Property(e => e.Title).IsRequired().HasMaxLength(256);
             builder.Property(e => e.Description).IsRequired().HasMaxLength(256);
-            builder.Property(e => e.Price).HasColumnType("decimal").IsRequired();
+            builder.Property(e => e.Price).HasColumnType("decimal(18,2)").IsRequired();
             builder.Property(e => e.BrandId).HasColumnType("int").IsRequired();
-            builder.Property(e => e.Discount).HasColumnType("decimal").IsRequired();
+            builder.Property(e => e.Discount).HasColumnType("decimal(18,2)").IsRequired();
             builder.Property(e => e.ImagePath).HasColumnType("nvarchar(256)").IsRequired();
             builder.Property(e => e.IsDeleted).IsRequired().HasDefaultValue(false);
             builder.Property(e => e.CreatedDate).IsRequired();
