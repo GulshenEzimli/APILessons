@@ -13,7 +13,7 @@ namespace Persistence.Configurations
 
             builder.Property(c => c.Name).IsRequired().HasMaxLength(100);
             builder.Property(c => c.Priority).HasColumnType("int").IsRequired();
-            builder.Property(c => c.ParentId).HasColumnType("int").IsRequired();
+            builder.Property(c => c.ParentId).HasColumnType("int").IsRequired(false);
             builder.Property(c => c.IsDeleted).IsRequired().HasDefaultValue(false);
             builder.Property(c => c.CreatedDate).IsRequired();
 

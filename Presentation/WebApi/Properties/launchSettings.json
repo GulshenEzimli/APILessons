@@ -22,7 +22,7 @@
         "LessonsApi.Development": {
             "commandName": "Project",
             "dotnetRunMessages": true,
-            "launchBrowser": true,
+            "launchBrowser": false,
             "applicationUrl": "https://localhost:7224",
             "environmentVariables": {
                 "ASPNETCORE_ENVIRONMENT": "Development"

@@ -1,4 +1,6 @@
+using Application;
 using Persistence;
+
 namespace WebApi
 {
     public class Program
@@ -17,6 +19,7 @@ namespace WebApi
 
             builder.Services.AddDbContext(builder.Configuration);
             builder.Services.AddPersistence();
+            builder.Services.AddApplication();
 
             var app = builder.Build();
 
