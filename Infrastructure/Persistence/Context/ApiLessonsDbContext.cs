@@ -27,9 +27,5 @@ namespace Persistence.Context
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.ConfigureWarnings(warningbuilder => warningbuilder.Ignore(RelationalEventId.PendingModelChangesWarning));
-        }
     }
 }
