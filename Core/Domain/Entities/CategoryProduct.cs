@@ -1,10 +1,12 @@
-﻿namespace Domain.Entities
+﻿using Domain.Interfaces;
+
+namespace Domain.Entities
 {
-    public class CategoryProduct
+    public class CategoryProduct : IEntityBase
     {
-        public int CategoryId { get; set; }
-        public Category Category { get; set; }
         public int ProductId { get; set; }
         public Product Product { get; set; }
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
     }
 }
