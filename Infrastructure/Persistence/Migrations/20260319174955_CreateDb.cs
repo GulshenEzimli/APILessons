@@ -34,7 +34,7 @@ namespace Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Priority = table.Column<int>(type: "int", nullable: false),
-                    ParentId = table.Column<int>(type: "int", nullable: false),
+                    ParentId = table.Column<int>(type: "int", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false)
                 },
@@ -57,9 +57,9 @@ namespace Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     BrandId = table.Column<int>(type: "int", nullable: false),
-                    Discount = table.Column<decimal>(type: "decimal(18,0)", nullable: false),
+                    Discount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ImagePath = table.Column<string>(type: "nvarchar(256)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false)
@@ -128,9 +128,9 @@ namespace Persistence.Migrations
                 column: "ParentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CategoryProduct_CategoryId",
-                table: "CategoryProduct",
-                column: "CategoryId");
+               name: "IX_CategoryProduct_ProductId",
+               table: "CategoryProduct",
+               column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Details_CategoryId",
