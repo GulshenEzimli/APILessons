@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Http;
 using SendGrid.Helpers.Errors.Model;
-using System.ComponentModel.DataAnnotations;
+using DataValidationException = System.ComponentModel.DataAnnotations.ValidationException;
 
 namespace Application.Exceptions
 {
@@ -26,6 +27,18 @@ namespace Application.Exceptions
             context.Response.StatusCode = statusCode;
             context.Response.ContentType = "application/json";
 
+            if (exception is ValidationException validationException)
+            {
+                var model = new ExceptionModel()
+                {
+                    Errors = validationException.Errors.Select(e => e.ErrorMessage),
+                    StatusCode = statusCode
+                };
+
+                await context.Response.WriteAsync(model.ToString());
+                return;
+            }
+
             List<string> errors = new ()
             {
                 exception.Message,
@@ -48,7 +61,7 @@ namespace Application.Exceptions
             {
                 BadRequestException => StatusCodes.Status400BadRequest,
                 NotFoundException => StatusCodes.Status400BadRequest,
-                ValidationException => StatusCodes.Status422UnprocessableEntity,
+                DataValidationException => StatusCodes.Status422UnprocessableEntity,
                 _ => StatusCodes.Status500InternalServerError
             };
         }
