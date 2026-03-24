@@ -10,5 +10,6 @@ namespace Application.Features.Products.Command
         public decimal Price { get; set; }
         public int BrandId { get; set; }
         public decimal Discount { get; set; }
+        public List<int> Categories { get; set; }
     }
 }

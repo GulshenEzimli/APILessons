@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Application.Interfaces.AutoMapper;
+using Application.Mapping;
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 namespace Application
@@ -9,6 +11,8 @@ namespace Application
         {
             Assembly currentAssembly = Assembly.GetExecutingAssembly();
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(currentAssembly));
+
+            services.AddSingleton<ICustomMapper, Mapper>(); 
         }
     }
 }

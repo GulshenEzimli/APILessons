@@ -12,5 +12,7 @@ namespace Application.Features.Products.Command
         public int BrandId { get; set; }
         public decimal Discount { get; set; }
         public bool IsDeleted { get; set; } = false;
+        public DateTime CreatedDate { get; set; }
+        public List<int> Categories { get; set; }
     }
 }

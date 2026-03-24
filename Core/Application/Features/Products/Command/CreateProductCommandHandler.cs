@@ -1,4 +1,5 @@
-﻿using Application.Interfaces.UnitOfWorks;
+﻿using Application.Interfaces.AutoMapper;
+using Application.Interfaces.UnitOfWorks;
 using Domain.Entities;
 using MediatR;
 
@@ -7,40 +8,58 @@ namespace Application.Features.Products.Command
     public class CreateProductCommandHandler : IRequestHandler<CreateProductCommandRequest, CreateProductCommandResponse>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public CreateProductCommandHandler(IUnitOfWork unitOfWork)
+        private readonly ICustomMapper _customMapper;
+        public CreateProductCommandHandler(IUnitOfWork unitOfWork, ICustomMapper customMapper)
         {
             _unitOfWork = unitOfWork;
+            _customMapper = customMapper;
         }
         public async Task<CreateProductCommandResponse> Handle(CreateProductCommandRequest request, CancellationToken cancellationToken)
         {
-            var product = new Product
-            {
-                Title = request.Title,
-                Description = request.Description,
-                ImagePath = request.ImagePath,
-                Price = request.Price,
-                BrandId = request.BrandId,
-                Discount = request.Discount,
-                CreatedDate = DateTime.Now,
-                IsDeleted = false,
-            };
+            var product = _customMapper.Map<CreateProductCommandRequest, Product>(request);
+            product.IsDeleted = false;
+            product.CreatedDate = DateTime.Now;
 
-            var result = new CreateProductCommandResponse();
-            
-            await _unitOfWork.BaseRepository<Product>().CreateAsync(product);
-            var count = await _unitOfWork.SaveAsync();
+            await _unitOfWork.BeginTransactionAsync(cancellationToken);
 
-            if (count == 1)
+            try
             {
-                result.SuccessMessage = "Product created successfully.";
-                result.IsSuccess = true;
+                await _unitOfWork.BaseRepository<Product>().CreateAsync(product);
+                await _unitOfWork.SaveAsync(cancellationToken);
+
+                foreach (var categoryId in request.Categories)
+                {
+                    await _unitOfWork.BaseRepository<CategoryProduct>().CreateAsync(new()
+                    {
+                        ProductId = product.Id,
+                        CategoryId = categoryId
+                    });
+                }
+
+                await _unitOfWork.SaveAsync(cancellationToken);
+                await _unitOfWork.CommitTransactionAsync(cancellationToken);
+
+                return new CreateProductCommandResponse()
+                {
+                    SuccessMessage = "Product created successfully!",
+                    IsSuccess = true
+                };
             }
-            else
+            catch (Exception)
             {
-                result.SuccessMessage = "Product could not create!";
-                result.IsSuccess = false;
+                await _unitOfWork.RollbackTransactionAsync(cancellationToken);
+
+                return new CreateProductCommandResponse()
+                {
+                    SuccessMessage = "Product can not create!",
+                    IsSuccess = false
+                };
             }
-            return result;
+            finally
+            {
+                await _unitOfWork.DisposeTransactionAsync();
+            }
+           
         }
     }
 }
