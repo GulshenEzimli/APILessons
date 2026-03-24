@@ -1,4 +1,5 @@
 using Application;
+using Application.Exceptions;
 using Persistence;
 
 namespace WebApi
@@ -28,6 +29,7 @@ namespace WebApi
                 app.MapOpenApi();
             }
 
+            app.UseExceptionMiddleware();
             app.UseHttpsRedirection();
 
             app.UseAuthorization();

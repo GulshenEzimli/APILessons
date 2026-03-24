@@ -1,4 +1,5 @@
-﻿using Application.Interfaces.AutoMapper;
+﻿using Application.Exceptions;
+using Application.Interfaces.AutoMapper;
 using Application.Mapping;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -12,7 +13,8 @@ namespace Application
             Assembly currentAssembly = Assembly.GetExecutingAssembly();
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(currentAssembly));
 
-            services.AddSingleton<ICustomMapper, Mapper>(); 
+            services.AddSingleton<ICustomMapper, Mapper>();
+            services.AddTransient<ExceptionMiddleware>();
         }
     }
 }
