@@ -1,4 +1,5 @@
-﻿using Application.Behaviors;
+﻿using Application.Bases;
+using Application.Behaviors;
 using Application.Exceptions;
 using Application.Interfaces.AutoMapper;
 using Application.Mapping;
@@ -21,6 +22,20 @@ namespace Application
 
             services.AddValidatorsFromAssembly(currentAssembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(FluentValidationBehavior<,>));
+
+            services.AddRulesFromAssemblyContaining(currentAssembly, typeof(BaseRules));
+
+        }
+        private static IServiceCollection AddRulesFromAssemblyContaining(this IServiceCollection services, Assembly assembly, Type type)
+        {
+            var ruleTypes = assembly.GetTypes().Where(t => t.IsSubclassOf(type) && t != type).ToList();
+
+            foreach (var item in ruleTypes)
+            {
+                services.AddTransient(item);
+            }
+
+            return services;
         }
     }
 }

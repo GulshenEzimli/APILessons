@@ -1,4 +1,6 @@
-﻿using Application.Interfaces.AutoMapper;
+﻿using Application.Bases;
+using Application.Features.Products.Rules;
+using Application.Interfaces.AutoMapper;
 using Application.Interfaces.UnitOfWorks;
 using Domain.Entities;
 using MediatR;
@@ -9,16 +11,22 @@ namespace Application.Features.Products.Command
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICustomMapper _customMapper;
-        public CreateProductCommandHandler(IUnitOfWork unitOfWork, ICustomMapper customMapper)
+        private readonly ProductRules _productRules;
+
+        public CreateProductCommandHandler(IUnitOfWork unitOfWork, ICustomMapper customMapper, ProductRules productRules)
         {
             _unitOfWork = unitOfWork;
             _customMapper = customMapper;
+            _productRules = productRules;
         }
         public async Task<CreateProductCommandResponse> Handle(CreateProductCommandRequest request, CancellationToken cancellationToken)
         {
             var product = _customMapper.Map<CreateProductCommandRequest, Product>(request);
             product.IsDeleted = false;
             product.CreatedDate = DateTime.Now;
+
+            var products = await _unitOfWork.BaseRepository<Product>().GetAllAsync();
+            await _productRules.ProductTitleMustNotBeExist(products, request.Title);
 
             await _unitOfWork.BeginTransactionAsync(cancellationToken);
 
