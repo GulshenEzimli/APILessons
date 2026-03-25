@@ -1,0 +1,19 @@
+﻿using Application.Features.Products.Command;
+using FluentValidation;
+
+namespace Application.Features.Products.Validators
+{
+    public class CreateProductCommandValidator : AbstractValidator<CreateProductCommandRequest>
+    {
+        public CreateProductCommandValidator()
+        {
+            RuleFor(x => x.Title).NotEmpty().WithName("Başlıq").WithMessage("{PropertyName} boş ola bilməz.");
+            RuleFor(x => x.Description).NotEmpty().WithName("Açıqlama").WithMessage("{PropertyName}  boş ola bilməz.");
+            RuleFor(x => x.BrandId).GreaterThan(0).WithName("Marka").WithMessage("{PropertyName} 0-dan böyük olmalıdır.");
+            RuleFor(x => x.Price).GreaterThan(0).WithName("Qiymət").WithMessage("{PropertyName}  0-dan böyük olmalıdır.");
+            RuleFor(x => x.Discount).GreaterThanOrEqualTo(0).WithName("Endirim dəyəri").WithMessage("{PropertyName}  0-dan kiçik olmamalıdır.");
+            RuleFor(x => x.Categories).NotEmpty().Must(categories => categories.Any()).WithName("Kateqoriyalar").WithMessage("{PropertyName}  boş ola bilməz.");
+
+        }
+    }
+}

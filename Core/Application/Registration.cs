@@ -1,6 +1,9 @@
-﻿using Application.Exceptions;
+﻿using Application.Behaviors;
+using Application.Exceptions;
 using Application.Interfaces.AutoMapper;
 using Application.Mapping;
+using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -15,6 +18,9 @@ namespace Application
 
             services.AddSingleton<ICustomMapper, Mapper>();
             services.AddTransient<ExceptionMiddleware>();
+
+            services.AddValidatorsFromAssembly(currentAssembly);
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(FluentValidationBehavior<,>));
         }
     }
 }
