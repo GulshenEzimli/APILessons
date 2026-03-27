@@ -1,16 +1,12 @@
 ﻿using Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using System.Reflection;
 
 namespace Persistence.Context
 {
-    public class ApiLessonsDbContext : DbContext
+    public class ApiLessonsDbContext : IdentityDbContext<User, Role, Guid>
     {
-        public ApiLessonsDbContext()
-        {
-        }
-
         public ApiLessonsDbContext(DbContextOptions<ApiLessonsDbContext> options) : base(options)
         {
         }
