@@ -12,7 +12,7 @@ namespace Persistence
 {
     public static class Registration
     {
-        public static void AddDbContext(this IServiceCollection services, IConfiguration configuration)
+        public static void AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
             string connectionstring = configuration.GetSection("ConnectionStrings:Default").Value;
             services.AddDbContext<ApiLessonsDbContext>(options => options.UseSqlServer(connectionstring));
@@ -28,12 +28,10 @@ namespace Persistence
             })
                 .AddRoles<Role>()
                 .AddEntityFrameworkStores<ApiLessonsDbContext>();
-        }
 
-        public static void AddPersistence(this IServiceCollection services)
-        {
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
         }
+
     }
 }

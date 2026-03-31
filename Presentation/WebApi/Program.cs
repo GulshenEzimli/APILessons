@@ -1,5 +1,6 @@
 using Application;
 using Application.Exceptions;
+using Infrastructure;
 using Persistence;
 
 namespace WebApi
@@ -18,9 +19,9 @@ namespace WebApi
                                .AddJsonFile("appSettings.json", optional : false)
                                .AddJsonFile($"appSettings.{env.EnvironmentName}.json", optional : true);
 
-            builder.Services.AddDbContext(builder.Configuration);
-            builder.Services.AddPersistence();
+            builder.Services.AddPersistence(builder.Configuration);
             builder.Services.AddApplication();
+            builder.Services.AddInfrastructure(builder.Configuration);
 
             var app = builder.Build();
 
