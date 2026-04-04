@@ -5,7 +5,6 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace Infrastructure.Tokens
@@ -51,35 +50,12 @@ namespace Infrastructure.Tokens
 
         public string GenerateRefreshToken()
         {
-            byte[] randomNumbers = new byte[64];
-            using var rng = RandomNumberGenerator.Create();
-            rng.GetBytes(randomNumbers);
-
-            return Convert.ToBase64String(randomNumbers);
+            throw new NotImplementedException();
         }
 
-        public ClaimsPrincipal GetPrincipalFromExpiredToken(string? token)
+        public ClaimsPrincipal GetPrincipalFromExpiredToken()
         {
-            TokenValidationParameters validator = new TokenValidationParameters()
-            {
-                ValidateIssuer = false,
-                ValidateAudience = false,
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenSettings.Secret)),
-                ValidateLifetime = false,
-            };
-
-            JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
-            ClaimsPrincipal claims = handler.ValidateToken(token, validator, out SecurityToken securityToken);
-
-            if(securityToken is not JwtSecurityToken jwtSecurityToken ||
-                !jwtSecurityToken.Header.Alg
-                .Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
-            {
-                throw new SecurityTokenException("Token tapilmadi");
-            }
-
-            return claims;
+            throw new NotImplementedException();
         }
     }
 }
