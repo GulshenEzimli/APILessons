@@ -17,7 +17,7 @@ namespace Application
             Assembly currentAssembly = Assembly.GetExecutingAssembly();
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(currentAssembly));
 
-            services.AddSingleton<ICustomMapper, Mapper>();
+            services.AddScoped<ICustomMapper, Mapper>();
             services.AddTransient<ExceptionMiddleware>();
 
             services.AddValidatorsFromAssembly(currentAssembly);

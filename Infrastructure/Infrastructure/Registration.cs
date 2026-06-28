@@ -36,6 +36,11 @@ namespace Infrastructure
                     ClockSkew = TimeSpan.Zero
                 };
             });
+
+            services.AddAuthorization(opt =>
+            {
+                opt.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+            });
         }
     }
 }

@@ -40,6 +40,9 @@ namespace WebApi
                 });
             });
 
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+
             var env = builder.Environment;
             builder.Configuration.SetBasePath(env.ContentRootPath)
                                .AddJsonFile("appSettings.json", optional : false)
@@ -48,7 +51,7 @@ namespace WebApi
             builder.Services.AddPersistence(builder.Configuration);
             builder.Services.AddApplication();
             builder.Services.AddInfrastructure(builder.Configuration);
-
+            
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())

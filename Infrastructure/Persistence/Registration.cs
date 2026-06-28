@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces.Repositories.EfCore;
 using Application.Interfaces.UnitOfWorks;
 using Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,7 +28,9 @@ namespace Persistence
                 options.SignIn.RequireConfirmedEmail = false;
             })
                 .AddRoles<Role>()
-                .AddEntityFrameworkStores<ApiLessonsDbContext>();
+                .AddEntityFrameworkStores<ApiLessonsDbContext>()
+                .AddSignInManager()
+                .AddDefaultTokenProviders();
 
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));

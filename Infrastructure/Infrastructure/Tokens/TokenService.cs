@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -20,34 +19,36 @@ namespace Infrastructure.Tokens
             _tokenSettings = options.Value;
             _userManager = userManager;
         }
-        public async Task<JwtSecurityToken> CreateToken(User user, IList<string> roles)
+        public async Task<(JwtSecurityToken, DateTime)> CreateToken(User user, IList<string> roles)
         {
             var claims = new List<Claim>()
             {
+                new Claim(JwtRegisteredClaimNames.Sub, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName ?? string.Empty),   
+                new Claim(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),   
-                new Claim(ClaimTypes.Email, user.Email),
+
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.UserName ?? string.Empty),
+                new Claim("Fullname", user.FullName),
             };
 
-            foreach (var role in roles)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, role));
-            }
+            claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
             var secretkey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenSettings.Secret));
             var signinCredential = new SigningCredentials(secretkey, SecurityAlgorithms.HmacSha256);
+            var expiresAt = DateTime.Now.AddMinutes(_tokenSettings.TokenValidityInMinutes);
 
             var token = new JwtSecurityToken(
                 issuer : _tokenSettings.Issuer,
                 audience : _tokenSettings.Audience,
                 claims : claims,
-                expires : DateTime.Now.AddMinutes(_tokenSettings.TokenValidityInMinutes),
+                expires : expiresAt,
                 signingCredentials : signinCredential
                 );
 
             await _userManager.AddClaimsAsync(user, claims);
-
-            return token;
+            return (token, expiresAt);
         }
 
         public string GenerateRefreshToken()
